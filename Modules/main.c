@@ -6,7 +6,16 @@
  */
 int Py_Main(int argc, char **argv)
 {
-  PyObject o = {PyObject_HEAD_INIT(NULL)};
-  printf("I am PyObject %p\n", &o);
+  char input[BUFSIZ];
+
+  fputs("Welcome to Python (Use Ctrl+C to exit)\n", stdout);
+
+  while (1)
+  {
+    fputs(">>> ", stdout);
+    fgets(input, BUFSIZ, stdin);
+    fputs(input, stdout);
+  }
+
   return 0;
 }
