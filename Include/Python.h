@@ -11,5 +11,6 @@
 /* Python头文件 */
 #include "pyport.h"
 #include "pythonrun.h"
+#include "object.h"
 
 #endif
