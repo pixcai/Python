@@ -7,7 +7,10 @@
 int Py_Main(int argc, char **argv)
 {
   char input[BUFSIZ];
-  PyObject v = {PyObject_HEAD_INIT(NULL)};
+  PyObject *v;
+
+  v = (PyObject *)PyObject_MALLOC(sizeof(PyObject));
+  _Py_NewReference(v);
 
   fputs("Welcome to Python (Use Ctrl+C to exit)\n", stdout);
 
@@ -15,9 +18,11 @@ int Py_Main(int argc, char **argv)
   {
     fputs(">>> ", stdout);
     fgets(input, BUFSIZ, stdin);
-    Py_INCREF(&v);
-    fprintf(stdout, "%s[ob_refcnt: %ld]\n", input, v.ob_refcnt);
+    Py_INCREF(v);
+    fprintf(stdout, "%s[ob_refcnt: %ld]\n", input, v->ob_refcnt);
   }
+
+  PyObject_FREE((void *)v);
 
   return 0;
 }

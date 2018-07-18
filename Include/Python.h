@@ -12,5 +12,6 @@
 #include "pyport.h"
 #include "pythonrun.h"
 #include "object.h"
+#include "objimpl.h"
 
 #endif

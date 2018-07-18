@@ -1,11 +1,16 @@
 CC = gcc
 CFLAGS = -IInclude
 PYTHON = python
+
 MODULE_OBJS = 		 						\
 	Modules/python.o						\
 	Modules/main.o
 
-all: $(MODULE_OBJS)
+OBJECT_OBJS = 								\
+	Objects/obmalloc.o
+
+
+all: $(MODULE_OBJS) $(OBJECT_OBJS)
 	$(CC) $^ -o $(PYTHON)
 
 .c.o:
