@@ -7,7 +7,8 @@ MODULE_OBJS = 		 						\
 	Modules/main.o
 
 OBJECT_OBJS = 								\
-	Objects/obmalloc.o
+	Objects/obmalloc.o					\
+	Objects/object.o
 
 
 all: $(MODULE_OBJS) $(OBJECT_OBJS)

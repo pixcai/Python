@@ -10,7 +10,7 @@ int Py_Main(int argc, char **argv)
   PyObject *v;
 
   v = (PyObject *)PyObject_MALLOC(sizeof(PyObject));
-  _Py_NewReference(v);
+  PyObject_Init(v, NULL);
 
   fputs("Welcome to Python (Use Ctrl+C to exit)\n", stdout);
 
