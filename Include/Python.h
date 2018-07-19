@@ -13,5 +13,6 @@
 #include "pythonrun.h"
 #include "object.h"
 #include "objimpl.h"
+#include "intobject.h"
 
 #endif

@@ -7,10 +7,7 @@
 int Py_Main(int argc, char **argv)
 {
   char input[BUFSIZ];
-  PyObject *v;
-
-  v = (PyObject *)PyObject_MALLOC(sizeof(PyObject));
-  PyObject_Init(v, NULL);
+  PyObject *v, *w, *x;
 
   fputs("Welcome to Python (Use Ctrl+C to exit)\n", stdout);
 
@@ -18,11 +15,29 @@ int Py_Main(int argc, char **argv)
   {
     fputs(">>> ", stdout);
     fgets(input, BUFSIZ, stdin);
-    Py_INCREF(v);
-    fprintf(stdout, "%s[ob_refcnt: %ld]\n", input, v->ob_refcnt);
+    /* 计算10以内的四则运算，例如：1+2、6+9 */
+    v = PyInt_FromLong(atol(&input[0]));
+    w = PyInt_FromLong(atol(&input[2]));
+    switch (input[1])
+    {
+      case '+':
+        x = PyInt_Type.tp_as_number->nb_add(v, w);
+        break;
+      case '-':
+        x = PyInt_Type.tp_as_number->nb_subtract(v, w);
+        break;
+      case '*':
+        x = PyInt_Type.tp_as_number->nb_multiple(v, w);
+        break;
+      case '/':
+        x = PyInt_Type.tp_as_number->nb_divide(v, w);
+        break;
+    }
+    fprintf(stdout, "%ld\n", ((PyIntObject *)x)->ob_ival);
+    PyInt_Type.tp_dealloc(v);
+    PyInt_Type.tp_dealloc(w);
+    PyInt_Type.tp_dealloc(x);
   }
-
-  PyObject_FREE((void *)v);
 
   return 0;
 }

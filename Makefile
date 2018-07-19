@@ -8,7 +8,8 @@ MODULE_OBJS = 		 						\
 
 OBJECT_OBJS = 								\
 	Objects/obmalloc.o					\
-	Objects/object.o
+	Objects/object.o						\
+	Objects/intobject.o
 
 
 all: $(MODULE_OBJS) $(OBJECT_OBJS)

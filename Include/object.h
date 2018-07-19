@@ -29,7 +29,17 @@ typedef struct _object {
   PyObject_HEAD
 } PyObject;
 
+/* 二元函数类型 */
+typedef PyObject *(*binaryfunc)(PyObject *, PyObject *);
 typedef void (*destructor)(PyObject *);
+
+/* 定义数学运算 */
+typedef struct {
+  binaryfunc nb_add;
+  binaryfunc nb_subtract;
+  binaryfunc nb_multiple;
+  binaryfunc nb_divide;
+} PyNumberMethods;
 
 typedef struct _typeobject {
   PyObject_VAR_HEAD
@@ -41,6 +51,8 @@ typedef struct _typeobject {
   Py_ssize_t tp_itemsize;
   /* 析构函数 */
   destructor tp_dealloc;
+  /* 对象的数学运算法则 */
+  PyNumberMethods *tp_as_number;
 } PyTypeObject;
 
 /* 初始化与反初始化引用值 */
