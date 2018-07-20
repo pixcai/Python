@@ -34,6 +34,7 @@ int Py_Main(int argc, char **argv)
         break;
     }
     fprintf(stdout, "%ld\n", ((PyIntObject *)x)->ob_ival);
+    fprintf(stdout, "<class '%s'>\n", x->ob_type->tp_name);
     PyInt_Type.tp_dealloc(v);
     PyInt_Type.tp_dealloc(w);
     PyInt_Type.tp_dealloc(x);

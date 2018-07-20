@@ -9,6 +9,7 @@ MODULE_OBJS = 		 						\
 OBJECT_OBJS = 								\
 	Objects/obmalloc.o					\
 	Objects/object.o						\
+	Objects/typeobject.o				\
 	Objects/intobject.o
 
 

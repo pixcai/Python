@@ -44,7 +44,7 @@ typedef struct {
 typedef struct _typeobject {
   PyObject_VAR_HEAD
   /* 对象的名称 */
-  const char *tb_name;
+  const char *tp_name;
   /* 对象的字节大小 */
   Py_ssize_t tp_basicsize;
   /* 对于可变长度对象，此值为对象单个值的字节大小；对于固定长度对象，此值为0 */
@@ -54,6 +54,13 @@ typedef struct _typeobject {
   /* 对象的数学运算法则 */
   PyNumberMethods *tp_as_number;
 } PyTypeObject;
+
+typedef struct _heaptypeobject {
+  PyTypeObject ht_type;
+} PyHeapTypeObject;
+
+/* 内置type */
+PyAPI_DATA(PyTypeObject) PyType_Type;
 
 /* 初始化与反初始化引用值 */
 #define _Py_NewReference(op) ((op)->ob_refcnt = 1)

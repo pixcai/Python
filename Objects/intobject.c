@@ -42,11 +42,11 @@ static PyNumberMethods int_as_number = {
 };
 
 PyTypeObject PyInt_Type = {
-  PyObject_HEAD_INIT(NULL)
-  0,
-  "int",
-  sizeof(PyIntObject),
-  0,
-  (destructor)int_dealloc,
-  &int_as_number,
+  PyObject_HEAD_INIT(&PyType_Type)
+  0,      /* ob_size */
+  "int",  /* tp_name */
+  sizeof(PyIntObject),      /* tp_basicsize */
+  0,      /* tp_itemsize */
+  (destructor)int_dealloc,  /* tp_dealloc */
+  &int_as_number,           /* tp_as_number */
 };
