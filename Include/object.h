@@ -29,6 +29,10 @@ typedef struct _object {
   PyObject_HEAD
 } PyObject;
 
+typedef struct {
+  PyObject_VAR_HEAD
+} PyVarObject;
+
 /* 二元函数类型 */
 typedef PyObject *(*binaryfunc)(PyObject *, PyObject *);
 typedef void (*destructor)(PyObject *);
