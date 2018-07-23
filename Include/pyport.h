@@ -3,6 +3,8 @@
 
 #include <sys/types.h>
 
+#define SIZEOF_VOID_P sizeof(void *)
+
 typedef ssize_t Py_ssize_t;
 
 /* 用于声明公共方法 */

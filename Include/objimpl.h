@@ -18,17 +18,26 @@ PyAPI_FUNC(void) PyObject_Free(void *);
 #define PyObject_FREE    PyObject_Free
 
 PyAPI_FUNC(PyObject *) PyObject_Init(PyObject *, PyTypeObject *);
+PyAPI_FUNC(PyVarObject *) PyObject_InitVar(PyVarObject *, PyTypeObject *, Py_ssize_t);
 
 /* 根据PyTypeObject生成PyObject */
 PyAPI_FUNC(PyObject *) _PyObject_New(PyTypeObject *);
+PyAPI_FUNC(PyVarObject *) _PyObject_NewVar(PyTypeObject *, Py_ssize_t);
 
 #define PyObject_New(type, typeobj) ((type *)_PyObject_New(typeobj))
+#define PyObject_NewVar(type, typeobj, n) ((type *)_PyObject_New((typeobj), (n)))
 
 /* 和PyObject_Init函数功能一样，只不过函数版本提供额外的错误处理 */
 #define PyObject_INIT(op, typeobj)            \
   ((op)->ob_type = (typeobj), _Py_NewReference((PyObject *)(op)), (op))
+#define PyObject_INIT_VAR(op, typeobj, size)  \
+  ((op)->ob_size = (size), PyObject_INIT((op), (typeobj)))
 
 #define _PyObject_SIZE(typeobj) ((typeobj)->tp_basicsize)
+#define _PyObject_VAR_SIZE(typeobj, nitems)   \
+  (size_t)(((typeobj)->tp_basicsize +         \
+    (nitems) * (typeobj)->tp_itemsize +       \
+      (SIZEOF_VOID_P - 1)) & ~(SIZEOF_VOID_P - 1))
 
 #define PyObject_NEW(type, typeobj)           \
   ((type *)PyObject_Init(                     \
