@@ -10,7 +10,8 @@ OBJECT_OBJS = 								\
 	Objects/obmalloc.o					\
 	Objects/object.o						\
 	Objects/typeobject.o				\
-	Objects/intobject.o
+	Objects/intobject.o					\
+	Objects/stringobject.o
 
 
 all: $(MODULE_OBJS) $(OBJECT_OBJS)

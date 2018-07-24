@@ -41,7 +41,7 @@ typedef void (*destructor)(PyObject *);
 typedef struct {
   binaryfunc nb_add;
   binaryfunc nb_subtract;
-  binaryfunc nb_multiple;
+  binaryfunc nb_multiply;
   binaryfunc nb_divide;
 } PyNumberMethods;
 
@@ -63,8 +63,15 @@ typedef struct _heaptypeobject {
   PyTypeObject ht_type;
 } PyHeapTypeObject;
 
+PyAPI_FUNC(int) PyType_IsSubType(PyTypeObject *, PyTypeObject *);
+#define PyObject_TypeCheck(ob, tp)  \
+  ((ob)->ob_type == (tp) || PyType_IsSubType((ob)->ob_type, (tp)))
+
 /* 内置type */
 PyAPI_DATA(PyTypeObject) PyType_Type;
+
+#define PyType_Check(op) PyObject_TypeCheck(op, &PyType_Type)
+#define PyType_CheckExact(op) ((op)->ob_type == &PyType_Type)
 
 /* 初始化与反初始化引用值 */
 #define _Py_NewReference(op) ((op)->ob_refcnt = 1)

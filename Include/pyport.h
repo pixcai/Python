@@ -7,6 +7,8 @@
 
 typedef ssize_t Py_ssize_t;
 
+#define Py_MEMCPY memcpy
+
 /* 用于声明公共方法 */
 #ifndef PyAPI_FUNC
 #define PyAPI_FUNC(RTYPE) RTYPE
