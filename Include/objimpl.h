@@ -42,6 +42,9 @@ PyAPI_FUNC(PyVarObject *) _PyObject_NewVar(PyTypeObject *, Py_ssize_t);
 #define PyObject_NEW(type, typeobj)           \
   ((type *)PyObject_Init(                     \
     (PyObject *)PyObject_MALLOC(_PyObject_SIZE(typeobj)), (typeobj)))
+#define PyObject_NEW_VAR(type, typeobj, n)    \
+  ((type *)PyObject_InitVar(                  \
+      (PyVarObject *)PyObject_MALLOC(_PyObject_VAR_SIZE((typeobj), (n))), (typeobj), (n)))
 
 #ifdef __cplusplus
 }
