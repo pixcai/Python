@@ -11,7 +11,8 @@ OBJECT_OBJS = 								\
 	Objects/object.o						\
 	Objects/typeobject.o				\
 	Objects/intobject.o					\
-	Objects/stringobject.o
+	Objects/stringobject.o			\
+	Objects/listobject.o
 
 
 all: $(MODULE_OBJS) $(OBJECT_OBJS)

@@ -1,5 +1,10 @@
 #include "Python.h"
 
+int PyType_IsSubType(PyTypeObject *a, PyTypeObject *b)
+{
+  return 1;
+}
+
 static void type_dealloc(PyTypeObject *type)
 {
 

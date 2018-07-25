@@ -84,12 +84,12 @@ PyAPI_DATA(PyTypeObject) PyType_Type;
 #define Py_INCREF(op) ((op)->ob_refcnt++)
 #define Py_DECREF(op)             \
   if (--(op)->ob_refcnt <= 0) {   \
-    _Py_Dealloc((PyObject *)(op)) \
+    _Py_Dealloc((PyObject *)(op));\
   }
 
 /* 非空指针时增加与减少引用值 */
 #define Py_XINCREF(op) if ((op) != NULL) Py_INCREF(op)
-#define Py_XDECINC(op) if ((op) != NULL) Py_DECREF(op)
+#define Py_XDECREF(op) if ((op) != NULL) Py_DECREF(op)
 
 #ifdef __cplusplus
 }

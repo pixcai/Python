@@ -15,5 +15,6 @@
 #include "objimpl.h"
 #include "intobject.h"
 #include "stringobject.h"
+#include "listobject.h"
 
 #endif

@@ -10,6 +10,7 @@ int Py_Main(int argc, char **argv)
   PyObject *v, *w, *x;
   PyObject *s;
 
+  s = PyList_New(2);
   fputs("Welcome to Python (Use Ctrl+C to exit)\n", stdout);
 
   while (1)
@@ -19,7 +20,8 @@ int Py_Main(int argc, char **argv)
     /* 计算10以内的四则运算，例如：1+2、6+9 */
     v = PyInt_FromLong(atol(&input[0]));
     w = PyInt_FromLong(atol(&input[2]));
-    s = PyString_FromStringAndSize(input, 3);
+    PyList_SetItem(s, 0, v);
+    PyList_SetItem(s, 1, w);
     switch (input[1])
     {
       case '+':
@@ -35,13 +37,14 @@ int Py_Main(int argc, char **argv)
         x = PyInt_Type.tp_as_number->nb_divide(v, w);
         break;
     }
-    fprintf(stdout, "%s=%ld\n", PyString_AsString(s), ((PyIntObject *)x)->ob_ival);
-    fprintf(stdout, "<class '%s'>\n", x->ob_type->tp_name);
-    PyInt_Type.tp_dealloc(v);
-    PyInt_Type.tp_dealloc(w);
+    fprintf(stdout, "%ld\n", ((PyIntObject *)x)->ob_ival);
+    fprintf(stdout, "[%ld, %ld]\n", 
+      ((PyIntObject *)PyList_GetItem(s, 0))->ob_ival,
+      ((PyIntObject *)PyList_GetItem(s, 1))->ob_ival
+    );
     PyInt_Type.tp_dealloc(x);
-    PyString_Type.tp_dealloc(s);
   }
+  PyList_Type.tp_dealloc(s);
 
   return 0;
 }
