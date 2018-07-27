@@ -66,3 +66,18 @@ long PyObject_Hash(PyObject *v)
   }
   return -1;
 }
+
+void *PyMem_Malloc(size_t nbytes)
+{
+  return PyMem_MALLOC(nbytes);
+}
+
+void *PyMem_Realloc(void *p, size_t nbytes)
+{
+  return PyMem_REALLOC(p, nbytes);
+}
+
+void PyMem_Free(void *p)
+{
+  PyMem_FREE(p);
+}
