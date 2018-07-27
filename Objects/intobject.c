@@ -34,6 +34,15 @@ static void int_dealloc(PyIntObject *v)
   PyObject_FREE(v);
 }
 
+static long int_hash(PyIntObject *v)
+{
+  long x = v->ob_ival;
+  if (x == -1) {
+    x = -2;
+  }
+  return x;
+}
+
 static PyNumberMethods int_as_number = {
   (binaryfunc)int_add,
   (binaryfunc)int_sub,
@@ -48,5 +57,6 @@ PyTypeObject PyInt_Type = {
   sizeof(PyIntObject),      /* tp_basicsize */
   0,      /* tp_itemsize */
   (destructor)int_dealloc,  /* tp_dealloc */
+  (hashfunc)int_hash,       /* tp_hash */
   &int_as_number,           /* tp_as_number */
 };

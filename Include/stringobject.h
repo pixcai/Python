@@ -6,6 +6,7 @@ extern "C" {
 
 typedef struct {
   PyObject_VAR_HEAD
+  long ob_shash;
   char ob_sval[1];
 } PyStringObject;
 

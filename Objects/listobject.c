@@ -83,12 +83,18 @@ static void list_dealloc(PyListObject *op)
   PyObject_FREE(op);
 }
 
+static long list_nohash(PyObject *self)
+{
+  return -1;
+}
+
 PyTypeObject PyList_Type = {
   PyObject_HEAD_INIT(&PyType_Type)
   0,
   "list",
   sizeof(PyListObject),
   0,
-  (destructor)list_dealloc,
+  (destructor)list_dealloc, /* tp_dealloc */
+  list_nohash,              /* tp_hash */
   0,
 };

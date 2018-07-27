@@ -51,3 +51,18 @@ PyVarObject *_PyObject_NewVar(PyTypeObject *tp, Py_ssize_t nitems)
   }
   return PyObject_INIT_VAR(op, tp, nitems);
 }
+
+/* 将对象的地址作为哈希值 */
+long _Py_HashPointer(void *p)
+{
+  return (long)p;
+}
+
+long PyObject_Hash(PyObject *v)
+{
+  PyTypeObject *tp = v->ob_type;
+  if (tp->tp_hash != NULL) {
+    return (*tp->tp_hash)(v);
+  }
+  return -1;
+}
