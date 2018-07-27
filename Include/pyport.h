@@ -18,4 +18,6 @@ typedef ssize_t Py_ssize_t;
 #define PyAPI_DATA(RTYPE) extern RTYPE
 #endif
 
+#define PY_FORMAT_SIZE_T "l"
+
 #endif

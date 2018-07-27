@@ -17,4 +17,6 @@
 #include "stringobject.h"
 #include "listobject.h"
 
+#define Py_CHARMASK(c) ((c) & 0xff)
+
 #endif

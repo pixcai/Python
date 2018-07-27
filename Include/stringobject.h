@@ -4,6 +4,8 @@
 extern "C" {
 #endif
 
+#include <stdarg.h>
+
 typedef struct {
   PyObject_VAR_HEAD
   long ob_shash;
@@ -17,8 +19,16 @@ PyAPI_DATA(PyTypeObject) PyString_Type;
 
 PyAPI_FUNC(PyObject *) PyString_FromStringAndSize(const char *, Py_ssize_t);
 PyAPI_FUNC(PyObject *) PyString_FromString(const char *);
+PyAPI_FUNC(PyObject *) PyString_FromFormatV(const char*, va_list);
+PyAPI_FUNC(PyObject *) PyString_FromFormat(const char*, ...);
 PyAPI_FUNC(Py_ssize_t) PyString_Size(PyObject *);
 PyAPI_FUNC(char *) PyString_AsString(PyObject *);
+PyAPI_FUNC(void) PyString_Concat(PyObject **, PyObject *);
+PyAPI_FUNC(void) PyString_ConcatAndDel(PyObject **, PyObject *);
+PyAPI_FUNC(int) _PyString_Resize(PyObject **, Py_ssize_t);
+
+#define PyString_AS_STRING(op) (((PyStringObject *)(op))->ob_sval)
+#define PyString_GET_SIZE(op) (((PyStringObject *)(op))->ob_size)
 
 #ifdef __cplusplus
 }

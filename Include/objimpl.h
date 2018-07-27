@@ -17,6 +17,9 @@ PyAPI_FUNC(void) PyObject_Free(void *);
 #define PyObject_REALLOC PyObject_Realloc
 #define PyObject_FREE    PyObject_Free
 
+#define PyObject_Del PyObject_Free
+#define PyObject_DEL PyObject_FREE
+
 PyAPI_FUNC(PyObject *) PyObject_Init(PyObject *, PyTypeObject *);
 PyAPI_FUNC(PyVarObject *) PyObject_InitVar(PyVarObject *, PyTypeObject *, Py_ssize_t);
 

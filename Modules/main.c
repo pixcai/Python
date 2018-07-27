@@ -10,6 +10,7 @@ int Py_Main(int argc, char **argv)
   PyObject *v, *w, *x;
   PyObject *s;
 
+  s = PyString_FromString("str: ");
   fputs("Welcome to Python (Use Ctrl+C to exit)\n", stdout);
 
   while (1)
@@ -20,6 +21,7 @@ int Py_Main(int argc, char **argv)
     v = PyInt_FromLong(atol(&input[0]));
     w = PyInt_FromLong(atol(&input[2]));
     input[3] = '\0';
+    PyString_ConcatAndDel(&s, PyString_FromFormat("%s, ", input));
     switch (input[1])
     {
       case '+':
@@ -36,12 +38,12 @@ int Py_Main(int argc, char **argv)
         break;
     }
     fprintf(stdout, "%ld\n", ((PyIntObject *)x)->ob_ival);
-    fprintf(stdout, "hash(%ld)=%ld\n", ((PyIntObject *)x)->ob_ival, PyObject_Hash(x));
-    fprintf(stdout, "hash(%s)=%ld\n", input, PyObject_Hash(PyString_FromString(input)));
+    fprintf(stdout, "%s\n", PyString_AS_STRING(s));
     PyInt_Type.tp_dealloc(v);
     PyInt_Type.tp_dealloc(w);
     PyInt_Type.tp_dealloc(x);
   }
+  PyString_Type.tp_dealloc(s);
 
   return 0;
 }
