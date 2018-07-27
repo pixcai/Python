@@ -19,6 +19,8 @@ PyAPI_FUNC(PyObject *) PyList_New(Py_ssize_t);
 PyAPI_FUNC(Py_ssize_t) PyList_Size(PyObject *);
 PyAPI_FUNC(PyObject *) PyList_GetItem(PyObject *, Py_ssize_t);
 PyAPI_FUNC(int) PyList_SetItem(PyObject *, Py_ssize_t, PyObject *);
+PyAPI_FUNC(int) PyList_Insert(PyObject *, Py_ssize_t, PyObject *);
+PyAPI_FUNC(int) PyList_Append(PyObject *, PyObject *);
 
 /* 牺牲类型安全换取速度 */
 #define PyList_GET_ITEM(op, i) (((PyListObject *)(op))->ob_item[i])

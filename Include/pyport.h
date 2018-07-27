@@ -2,6 +2,7 @@
 #define Py_PYPORT_H
 
 #include <sys/types.h>
+#include <stdint.h>
 
 #define SIZEOF_VOID_P sizeof(void *)
 
@@ -19,5 +20,10 @@ typedef ssize_t Py_ssize_t;
 #endif
 
 #define PY_FORMAT_SIZE_T "l"
+
+#define PY_SIZE_MAX SIZE_MAX
+
+#define PY_SSIZE_T_MAX ((Py_ssize_t)(((size_t)-1)>>1))
+#define PY_SSIZE_T_MIN (-PY_SSIZE_T_MAX-1)
 
 #endif

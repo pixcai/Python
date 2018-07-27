@@ -10,6 +10,7 @@
 
 /* Python头文件 */
 #include "pyport.h"
+#include "pymem.h"
 #include "pythonrun.h"
 #include "object.h"
 #include "objimpl.h"
